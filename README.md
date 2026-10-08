@@ -7,7 +7,6 @@ Every Zomato order I've ever placed, dumped into one pile on a single web page.
 - Search something else and the plate tips its items back onto the pile.
 - Hover any item to see where it came from: restaurant, date, area, order total.
 
-It's one self-contained HTML file using [Matter.js](https://brm.io/matter-js/) for the physics and emoji for the food. Inspired by Sumit Bedi's Swiggy "my year, in a pile" concept on LinkedIn.
 
 ## Try it
 
