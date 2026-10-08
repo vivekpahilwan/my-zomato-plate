@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Zomato Pile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800;1,900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<style>
+  :root {
+    --red: #e23744; --red-deep: #cb202d; --ink: #1c1c1c; --muted: #696969; --faint: #9c9c9c;
+    --line: #e8e8e8; --card: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; font-family: "Montserrat", system-ui, sans-serif; color: var(--ink);
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,.10) 0 2px, transparent 3px) 0 0 / 34px 34px,
+      linear-gradient(160deg, #ef4f5f 0%, var(--red) 40%, var(--red-deep) 100%);
+    display: grid; place-items: center; padding: 28px 16px;
+  }
+  .card {
+    position: relative; width: min(1200px, 100%); height: min(660px, calc(100vh - 56px)); min-height: 540px;
+    background: var(--card); border-radius: 22px; overflow: hidden;
+    box-shadow: 0 30px 70px rgba(90, 0, 10, .35);
+  }
+  #stage { position: absolute; inset: 0; }
+  #stage canvas { display: block; }
+  .panel { position: absolute; top: 36px; left: 56px; width: min(340px, calc(100% - 32px)); pointer-events: none; }
+  .brand { display: flex; align-items: baseline; gap: 10px; }
+  .brand b { font-weight: 900; font-style: italic; font-size: 26px; letter-spacing: -.04em; color: var(--ink); }
+  .brand span {
+    font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: #fff; background: var(--red); padding: 3px 8px; border-radius: 4px; transform: translateY(-3px);
+  }
+  .search {
+    pointer-events: auto; margin-top: 34px; display: flex; align-items: center; gap: 10px;
+    border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; background: #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,.05); transition: border-color .2s, box-shadow .2s;
+  }
+  .search:focus-within { border-color: var(--red); box-shadow: 0 6px 22px rgba(226,55,68,.16); }
+  .search svg { flex: none; }
+  #q { flex: 1; min-width: 0; border: 0; outline: none; font: 500 17px "Montserrat", sans-serif; color: var(--ink); background: transparent; caret-color: var(--red); }
+  #q::placeholder { color: #b4b4b4; font-weight: 400; }
+  #idle { margin-top: 14px; font-size: 12px; color: var(--muted); pointer-events: auto; }
+  #ticker { font-weight: 600; color: var(--red); min-height: 18px; }
+  #summary { margin-top: 4px; }
+  .try { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .try a {
+    cursor: pointer; font-size: 12px; font-weight: 500; color: var(--ink); background: #fff3f4;
+    border: 1px solid #fbd5d9; border-radius: 999px; padding: 5px 10px;
+  }
+  .try a:hover { background: var(--red); border-color: var(--red); color: #fff; }
+  #result { display: none; margin-top: 26px; }
+  #result.on { display: block; animation: rise .4s ease-out; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+  #num { font-weight: 800; font-size: 108px; line-height: .95; letter-spacing: -.05em; color: var(--ink); }
+  #label { font-size: 19px; font-weight: 700; margin-top: 8px; text-transform: lowercase; }
+  #paid { display: inline-block; margin-top: 8px; font-size: 15px; font-weight: 700; color: #fff; background: var(--red); padding: 4px 10px; border-radius: 6px; }
+  #insight { font-size: 12px; color: var(--muted); margin-top: 14px; line-height: 1.65; max-width: 260px; }
+  #tip {
+    position: fixed; pointer-events: none; z-index: 10; display: none; min-width: 210px; max-width: 300px;
+    background: #fff; border-radius: 12px; padding: 12px 14px 12px 16px; border-left: 4px solid var(--red);
+    box-shadow: 0 12px 30px rgba(0,0,0,.14); font-size: 12px; line-height: 1.55;
+  }
+  #tip .t { font-size: 14px; font-weight: 700; }
+  #tip .r { color: var(--muted); font-weight: 500; }
+  #tip .d { color: var(--faint); }
+  #tip .p { color: var(--red); font-weight: 700; margin-top: 2px; }
+  @media (max-width: 700px) {
+    .panel { left: 18px; top: 22px; }
+    #num { font-size: 72px; }
+    #result { margin-top: 16px; }
+    #insight { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <div id="stage"></div>
+  <div class="panel">
+    <div class="brand"><b>zomato</b><span>my orders, in a pile</span></div>
+    <label class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e23744" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" placeholder="Search a dish or restaurant" autocomplete="off" spellcheck="false">
+    </label>
+    <div id="idle">
+      <div id="ticker"></div>
+      <div id="summary"></div>
+      <div class="try" id="try"></div>
+    </div>
+    <div id="result">
+      <div id="num">0</div>
+      <div id="label"></div>
+      <div id="paid"></div>
+      <div id="insight"></div>
+    </div>
+  </div>
+</div>
+<div id="tip"></div>
+
+<script>
+// ---- DATA (from Zomato MCP get_order_history) ----------------------------
+const ORDERS = /*__ORDERS__*/[];
+
+// ---- FOOD → EMOJI (first match wins) --------------------------------------
+const EMOJI = [
+  [/biryani/i, "🍛"],
+  [/fried rice|rice bowl|rice plate|pulao|pulav|bhaat|lemon rice|curd rice|puliyogare|alani rice|schezwan rice|\brice\b/i, "🍚"],
+  [/khichdi|khichadi|daliya|raita/i, "🥣"],
+  [/pizza|^onion$|^golden corn$/i, "🍕"],
+  [/burger|value meal|meal \(r\)/i, "🍔"],
+  [/fries/i, "🍟"],
+  [/sandwich/i, "🥪"],
+  [/roll|wrap|shawarma|shawrma|burrito/i, "🌯"],
+  [/momo/i, "🥟"],
+  [/noodle|chowmein/i, "🍜"],
+  [/pasta/i, "🍝"],
+  [/omelette|omellete|bhurji|boiled egg|^egg$|anda/i, "🍳"],
+  [/idli|vada plate|punugulu|upma/i, "🍙"],
+  [/dosa|uttapam|chilla/i, "🥞"],
+  [/paratha|thepla|thalipeeth|chapati|chapatti|roti|bhakri|kulche|phulka/i, "🫓"],
+  [/pav/i, "🍞"],
+  [/samosa/i, "🥟"],
+  [/bhel|misal|rassa|papad/i, "🥗"],
+  [/lassi|chaas|buttermilk|taak/i, "🥛"],
+  [/chocolate|shake/i, "🥤"],
+  [/tea/i, "🍵"],
+  [/cake/i, "🍰"],
+  [/salad/i, "🥗"],
+  [/chicken|lollipop|strips/i, "🍗"],
+  [/dip/i, "🫙"],
+  [/thali|meal|plate|box|curry|masala|chaap|pithla|dal|dhapate|litti|chickpea|combo/i, "🍱"],
+];
+const emojiFor = name => (EMOJI.find(([re]) => re.test(name)) || [, "🍽️"])[1];
+
+// ---- HELPERS -------------------------------------------------------------
+const rupee = n => "₹" + Math.round(n).toLocaleString("en-IN");
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const DAY_NAMES = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"];
+const asDate = s => new Date(s + "T12:00:00");
+const monthYear = s => asDate(s).toLocaleString("en-IN", { month: "short", year: "numeric" });
+const fmtDate = s => { const d = asDate(s); return `${DAYS[d.getDay()]} ${d.getDate()} ${d.toLocaleString("en-IN", { month: "short" })} ${d.getFullYear()}`; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+
+// one piece per unit eaten, oldest first; each remembers its order and position within it
+const pieces = [];
+for (const o of [...ORDERS].sort((a, b) => a.date.localeCompare(b.date))) {
+  const units = o.items.reduce((s, it) => s + it.qty, 0);
+  let n = 0;
+  for (const it of o.items)
+    for (let i = 0; i < it.qty; i++)
+      pieces.push({ name: it.name, addons: it.addons, emoji: emojiFor(it.name), order: o, nth: ++n, of: units, share: o.total / units });
+}
+
+// ---- STAGE + PHYSICS -----------------------------------------------------
+const { Engine, Render, Runner, Bodies, Body, Composite, Mouse, MouseConstraint, Query, Events } = Matter;
+const stage = document.getElementById("stage"), card = document.getElementById("card");
+const engine = Engine.create({ gravity: { y: 1.1 } });
+let W = card.clientWidth, H = card.clientHeight;
+const render = Render.create({ element: stage, engine, options: { width: W, height: H, wireframes: false, background: "transparent", pixelRatio: window.devicePixelRatio } });
+Render.run(render);
+Runner.run(Runner.create(), engine);
+
+let walls = [];
+function buildWalls() {
+  Composite.remove(engine.world, walls);
+  const t = 200;
+  walls = [
+    Bodies.rectangle(W / 2, H + t / 2, W * 3, t, { isStatic: true, render: { visible: false } }),
+    Bodies.rectangle(-t / 2, H / 2, t, H * 4, { isStatic: true, render: { visible: false } }),
+    Bodies.rectangle(W + t / 2, H / 2, t, H * 4, { isStatic: true, render: { visible: false } }),
+  ];
+  Composite.add(engine.world, walls);
+}
+buildWalls();
+
+// ---- LOAD: deliver the pile in date order, sweeping left → right ----------
+const R = Math.max(9, Math.min(18, Math.sqrt((W * H * 0.17) / (pieces.length * Math.PI)) * 1.05));
+const bodies = [];
+const ticker = document.getElementById("ticker");
+const spawnGap = Math.min(20, 3200 / pieces.length);
+pieces.forEach((p, n) => {
+  setTimeout(() => {
+    const x = R + (n / pieces.length) * (W - 2 * R) + (Math.random() - 0.5) * 90;
+    const b = Bodies.circle(Math.min(W - R, Math.max(R, x)), -R * 2, R * (0.9 + Math.random() * 0.2),
+      { restitution: 0.2, friction: 0.5, frictionAir: 0.01, render: { visible: false } });
+    b.piece = p; b.tilt = (Math.random() - 0.5) * 0.8;
+    Body.setVelocity(b, { x: (Math.random() - 0.5) * 2, y: 4 });
+    Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.3);
+    bodies.push(b);
+    Composite.add(engine.world, b);
+    ticker.textContent = `delivering · ${monthYear(p.order.date)}`;
+    if (n === pieces.length - 1) setTimeout(() => ticker.textContent = "", 600);
+  }, 300 + n * spawnGap);
+});
+const spent = ORDERS.reduce((s, o) => s + o.total, 0);
+const span = [...ORDERS].sort((a, b) => a.date.localeCompare(b.date));
+document.getElementById("summary").textContent =
+  `${pieces.length} things · ${ORDERS.length} orders · ${rupee(spent)} · ${monthYear(span[0].date)} – ${monthYear(span.at(-1).date)}`;
+
+// ---- SERVE ONTO A PLATE / SPILL BACK -------------------------------------
+let served = [];          // bodies currently on the plate
+let plate = null;         // { x, y, r, t0, out }
+let landed = 0;
+const NONE = { group: 0, category: 0x0002, mask: 0 };
+const NORMAL = { group: 0, category: 0x0001, mask: 0xFFFFFFFF };
+const GOLDEN = Math.PI * (3 - Math.sqrt(5));
+
+function plateCentre() {
+  return W < 700 ? { x: W * 0.5, y: H * 0.56 } : { x: W * 0.68, y: H * 0.38 };
+}
+function serve(match) {
+  spill();
+  const n = match.length; if (!n) return;
+  const c = plateCentre();
+  const step = R * 1.85;
+  const outer = step * Math.sqrt(n) + R * 1.2;
+  const maxR = Math.min(H * 0.3, W < 700 ? W * 0.4 : W * 0.2);
+  const k = outer > maxR ? maxR / outer : 1;              // shrink spacing for big plates
+  plate = { x: c.x, y: c.y, r: Math.max(outer * k, R * 3) + R * 0.9, t0: performance.now(), out: null };
+  landed = 0;
+  match.forEach((b, i) => {
+    // sunflower spiral: first piece in the middle, later ones curl outward
+    const rr = step * k * Math.sqrt(i + 0.5), th = i * GOLDEN;
+    b.target = { x: c.x + rr * Math.cos(th), y: c.y + rr * Math.sin(th) };
+    b.from = { x: b.position.x, y: b.position.y };
+    b.fromAngle = b.angle;
+    b.t0 = performance.now() + 250 + i * Math.min(45, 1400 / n);
+    b.landed = false;
+    b.collisionFilter = NONE;
+    Body.setStatic(b, true);
+    served.push(b);
+  });
+}
+function spill() {
+  if (plate) plate.out = performance.now();
+  const c = plate || plateCentre();
+  for (const b of served) {
+    b.target = null;
+    Body.setStatic(b, false);
+    b.collisionFilter = NORMAL;
+    // the plate tips: everything slides off sideways and tumbles back down
+    const dir = Math.sign(b.position.x - c.x) || 1;
+    Body.setVelocity(b, { x: dir * (2 + Math.random() * 3), y: -2 - Math.random() * 3 });
+    Body.setAngularVelocity(b, dir * (0.1 + Math.random() * 0.2));
+  }
+  served = [];
+}
+const easeInOut = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const easeOutBack = t => 1 + 2.2 * Math.pow(t - 1, 3) + 1.2 * Math.pow(t - 1, 2);
+const num = document.getElementById("num");
+Events.on(engine, "beforeUpdate", () => {
+  const now = performance.now();
+  for (const b of served) {
+    if (!b.target) continue;
+    const t = Math.min(1, Math.max(0, (now - b.t0) / 650));
+    const e = easeInOut(t);
+    // fly in a high loop, spinning once on the way
+    const lift = Math.sin(e * Math.PI) * -120;
+    Body.setPosition(b, { x: b.from.x + (b.target.x - b.from.x) * e, y: b.from.y + (b.target.y - b.from.y) * e + lift });
+    Body.setAngle(b, b.fromAngle * (1 - e) + e * Math.PI * 2);
+    if (t === 1 && !b.landed) { b.landed = true; b.pop = now; landed++; num.textContent = landed; }
+  }
+});
+
+// ---- DRAW ----------------------------------------------------------------
+let hovered = null;
+Events.on(render, "afterRender", () => {
+  const ctx = render.context, now = performance.now();
+  ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  const font = r => `${r * 1.9}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
+
+  // the plate: pops in, shrinks away when spilled
+  if (plate) {
+    let s = easeOutBack(Math.min(1, (now - plate.t0) / 450));
+    if (plate.out) s *= Math.max(0, 1 - (now - plate.out) / 300);
+    if (s > 0.01) {
+      const r = plate.r * s;
+      ctx.save();
+      ctx.translate(plate.x, plate.y);
+      ctx.shadowColor = "rgba(120,0,15,.18)"; ctx.shadowBlur = 30; ctx.shadowOffsetY = 12;
+      ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fillStyle = "#fff"; ctx.fill();
+      ctx.shadowColor = "transparent";
+      ctx.lineWidth = Math.max(4, r * 0.05); ctx.strokeStyle = "#e23744";
+      ctx.beginPath(); ctx.arc(0, 0, r - ctx.lineWidth / 2, 0, Math.PI * 2); ctx.stroke();
+      ctx.lineWidth = 1; ctx.strokeStyle = "#f4d6d9";
+      ctx.beginPath(); ctx.arc(0, 0, r * 0.82, 0, Math.PI * 2); ctx.stroke();
+      ctx.restore();
+    } else if (plate.out) plate = null;
+  }
+
+  // Matter leaves fillStyle transparent, which would hide the emoji too
+  ctx.fillStyle = "#000";
+  const onPlate = new Set(served);
+  for (const b of bodies) {
+    if (onPlate.has(b)) continue;
+    ctx.save();
+    ctx.translate(b.position.x, b.position.y); ctx.rotate(b.angle + b.tilt);
+    ctx.globalAlpha = served.length ? 0.55 : 1;
+    ctx.font = font(b.circleRadius);
+    ctx.fillText(b.piece.emoji, 0, b.circleRadius * 0.08);
+    ctx.restore();
+  }
+  for (const b of served) {
+    ctx.save();
+    ctx.translate(b.position.x, b.position.y); ctx.rotate(b.angle);
+    const pop = b.pop ? Math.max(0, 1 - (now - b.pop) / 250) : 0;
+    const sc = (b === hovered ? 1.3 : 1) + pop * 0.35;
+    ctx.scale(sc, sc);
+    ctx.shadowColor = "rgba(0,0,0,.15)"; ctx.shadowBlur = 6; ctx.shadowOffsetY = 3;
+    ctx.font = font(b.circleRadius);
+    ctx.fillText(b.piece.emoji, 0, b.circleRadius * 0.08);
+    ctx.restore();
+  }
+});
+
+const mouse = Mouse.create(render.canvas);
+mouse.pixelRatio = window.devicePixelRatio;
+Composite.add(engine.world, MouseConstraint.create(engine, { mouse, constraint: { stiffness: 0.15, render: { visible: false } } }));
+render.mouse = mouse;
+render.canvas.removeEventListener("wheel", mouse.mousewheel);
+render.canvas.removeEventListener("mousewheel", mouse.mousewheel);
+render.canvas.removeEventListener("DOMMouseScroll", mouse.mousewheel);
+
+// ---- TOOLTIP -------------------------------------------------------------
+const tip = document.getElementById("tip");
+render.canvas.addEventListener("mousemove", e => {
+  const rect = render.canvas.getBoundingClientRect();
+  const pt = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  hovered = Query.point(served, pt)[0] || Query.point(bodies, pt)[0] || null;
+  if (!hovered) { tip.style.display = "none"; return; }
+  const p = hovered.piece, o = p.order;
+  tip.innerHTML = `<div class="t">${p.emoji} ${esc(p.name)}</div>
+    <div class="r">${esc(o.restaurant)}</div>
+    <div class="d">${fmtDate(o.date)} · ${esc(o.area)}</div>
+    <div class="p">${rupee(o.total)} order${p.of > 1 ? ` · item ${p.nth} of ${p.of}` : ""}</div>`;
+  tip.style.display = "block";
+  tip.style.left = Math.min(e.clientX + 16, innerWidth - tip.offsetWidth - 8) + "px";
+  tip.style.top = Math.min(e.clientY + 14, innerHeight - tip.offsetHeight - 8) + "px";
+});
+render.canvas.addEventListener("mouseleave", () => { hovered = null; tip.style.display = "none"; });
+
+// ---- SEARCH --------------------------------------------------------------
+const q = document.getElementById("q"), result = document.getElementById("result"), idle = document.getElementById("idle");
+function insight(match) {
+  const units = match.length;
+  const byRes = {};
+  match.forEach(b => byRes[b.piece.order.restaurant] = (byRes[b.piece.order.restaurant] || 0) + 1);
+  const [topRes, topN] = Object.entries(byRes).sort((a, b) => b[1] - a[1])[0];
+  const share = Math.round(topN / units * 100);
+  const parts = [share === 100 ? `All from ${topRes}.` : `${share}% from ${topRes}.`];
+
+  const orders = [...new Map(match.map(b => [b.piece.order.id, b.piece.order])).values()];
+  const days = Array(7).fill(0);
+  orders.forEach(o => days[asDate(o.date).getDay()]++);
+  const best = days.indexOf(Math.max(...days));
+  const weekend = days[0] + days[6];
+  if (orders.length >= 3 && days[best] / orders.length >= 0.35) parts.push(`Mostly on ${DAY_NAMES[best]}.`);
+  else if (orders.length >= 3 && weekend / orders.length >= 0.5) parts.push("Mostly on weekends.");
+  else if (orders.length >= 3) parts.push("Mostly on weekdays.");
+
+  const ds = orders.map(o => asDate(o.date)).sort((a, b) => a - b);
+  if (orders.length === 1) parts.push(`Just once, on ${fmtDate(orders[0].date)}.`);
+  else {
+    const every = Math.max(1, Math.round((ds.at(-1) - ds[0]) / 864e5 / (orders.length - 1)));
+    parts.push(`${orders.length} orders, one every ${every} day${every > 1 ? "s" : ""}.`);
+  }
+  return parts.join(" ");
+}
+let lastQuery = "";
+function search(raw) {
+  const s = raw.trim().toLowerCase();
+  if (s === lastQuery) return;
+  lastQuery = s;
+  idle.style.display = s ? "none" : "block";
+  if (!s) { spill(); result.classList.remove("on"); return; }
+  // dish names first; fall back to restaurant names ("burger king", "domino")
+  let match = bodies.filter(b => b.piece.name.toLowerCase().includes(s));
+  if (!match.length) match = bodies.filter(b => b.piece.order.restaurant.toLowerCase().includes(s));
+  serve(match);
+  const paid = match.reduce((t, b) => t + b.piece.share, 0);
+  num.textContent = "0";
+  document.getElementById("label").textContent = raw.trim();
+  const paidEl = document.getElementById("paid");
+  paidEl.style.display = match.length ? "inline-block" : "none";
+  paidEl.textContent = `${rupee(paid)} spent`;
+  document.getElementById("insight").textContent = match.length ? insight(match) : "Nothing like that in the pile.";
+  result.classList.remove("on"); void result.offsetWidth; result.classList.add("on");
+}
+let timer;
+q.addEventListener("input", () => { clearTimeout(timer); timer = setTimeout(() => search(q.value), 280); });
+q.addEventListener("keydown", e => { if (e.key === "Enter") { clearTimeout(timer); search(q.value); } if (e.key === "Escape") { q.value = ""; search(""); } });
+
+// a few starting points: the most-ordered dishes
+const tally = {};
+pieces.forEach(p => { const k = p.name.toLowerCase(); (tally[k] = tally[k] || new Set()).add(p.order.id); });
+const tries = Object.entries(tally).sort((a, b) => b[1].size - a[1].size).slice(0, 4).map(([k]) => k);
+document.getElementById("try").innerHTML = tries.map(t => `<a data-q="${esc(t)}">${esc(t)}</a>`).join("");
+document.getElementById("try").addEventListener("click", e => {
+  const a = e.target.closest("a"); if (!a) return;
+  q.value = a.dataset.q; search(q.value); q.focus();
+});
+
+// ---- RESIZE --------------------------------------------------------------
+addEventListener("resize", () => {
+  W = card.clientWidth; H = card.clientHeight;
+  render.options.width = W; render.options.height = H;
+  render.canvas.style.width = W + "px"; render.canvas.style.height = H + "px";
+  Render.setPixelRatio(render, devicePixelRatio);
+  buildWalls();
+  if (served.length) { const held = served.slice(); served = []; plate = null; serve(held); }
+});
+</script>
+</body>
+</html>

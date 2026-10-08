@@ -1,0 +1,997 @@
+[
+ {
+  "id": "demo060",
+  "date": "2026-09-17",
+  "restaurant": "Ghar Ka Khana",
+  "area": "Old Town",
+  "total": 151.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Rajma Rice Bowl",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo059",
+  "date": "2026-09-12",
+  "restaurant": "Sweet Tooth",
+  "area": "Lake Road",
+  "total": 277.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Gulab Jamun",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Chocolate Cake Slice",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo058",
+  "date": "2026-08-28",
+  "restaurant": "Paratha Lane",
+  "area": "Station Road",
+  "total": 121.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Masala Chaas",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo057",
+  "date": "2026-08-23",
+  "restaurant": "Roll Republic",
+  "area": "Lake Road",
+  "total": 75.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Aloo Tikki Wrap",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo056",
+  "date": "2026-08-12",
+  "restaurant": "Ghar Ka Khana",
+  "area": "Lake Road",
+  "total": 84.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Rajma Rice Bowl",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo055",
+  "date": "2026-08-01",
+  "restaurant": "Roll Republic",
+  "area": "Sector 5",
+  "total": 392.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Aloo Tikki Wrap",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Paneer Kathi Roll",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo054",
+  "date": "2026-07-18",
+  "restaurant": "Sweet Tooth",
+  "area": "Old Town",
+  "total": 190.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Gulab Jamun",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo053",
+  "date": "2026-07-11",
+  "restaurant": "Ghar Ka Khana",
+  "area": "Hill View",
+  "total": 90.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Veg Thali",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo052",
+  "date": "2026-06-30",
+  "restaurant": "Wok This Way",
+  "area": "Sector 5",
+  "total": 283.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Hakka Noodles",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Veg Fried Rice",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo051",
+  "date": "2026-06-17",
+  "restaurant": "Crust & Co",
+  "area": "Sector 5",
+  "total": 155.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Margherita Pizza",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo050",
+  "date": "2026-06-04",
+  "restaurant": "Ghar Ka Khana",
+  "area": "Market Yard",
+  "total": 220.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Chapati",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo049",
+  "date": "2026-05-28",
+  "restaurant": "Sweet Tooth",
+  "area": "Lake Road",
+  "total": 177.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Gulab Jamun",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo048",
+  "date": "2026-05-18",
+  "restaurant": "Sweet Tooth",
+  "area": "Hill View",
+  "total": 270.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Gulab Jamun",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo047",
+  "date": "2026-05-08",
+  "restaurant": "Tiffin Theory",
+  "area": "Station Road",
+  "total": 148.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Filter Coffee",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo046",
+  "date": "2026-04-26",
+  "restaurant": "Crust & Co",
+  "area": "Station Road",
+  "total": 134.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Margherita Pizza",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo045",
+  "date": "2026-04-13",
+  "restaurant": "Roll Republic",
+  "area": "Lake Road",
+  "total": 481.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Paneer Kathi Roll",
+    "qty": 2,
+    "addons": []
+   },
+   {
+    "name": "Egg Roll",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo044",
+  "date": "2026-04-06",
+  "restaurant": "Tiffin Theory",
+  "area": "Market Yard",
+  "total": 130.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Idli Sambar",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo043",
+  "date": "2026-03-24",
+  "restaurant": "Sweet Tooth",
+  "area": "Station Road",
+  "total": 338.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Chocolate Cake Slice",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo042",
+  "date": "2026-03-16",
+  "restaurant": "Bun Stop",
+  "area": "Lake Road",
+  "total": 350.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Chocolate Shake",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo041",
+  "date": "2026-03-03",
+  "restaurant": "Paratha Lane",
+  "area": "Sector 5",
+  "total": 455.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Paneer Paratha",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Sweet Lassi",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo040",
+  "date": "2026-02-21",
+  "restaurant": "Roll Republic",
+  "area": "Lake Road",
+  "total": 248.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Egg Roll",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Peri Peri Fries",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo039",
+  "date": "2026-02-14",
+  "restaurant": "Midnight Momos",
+  "area": "Market Yard",
+  "total": 244.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Chicken Fried Momo",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Veg Steamed Momo",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo038",
+  "date": "2026-02-03",
+  "restaurant": "Wok This Way",
+  "area": "Lake Road",
+  "total": 346.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Egg Fried Rice",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo037",
+  "date": "2026-01-20",
+  "restaurant": "Ghar Ka Khana",
+  "area": "Lake Road",
+  "total": 162.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Chapati",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo036",
+  "date": "2026-01-14",
+  "restaurant": "Ghar Ka Khana",
+  "area": "Market Yard",
+  "total": 206.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Veg Thali",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Chapati",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo035",
+  "date": "2026-01-03",
+  "restaurant": "Tiffin Theory",
+  "area": "Sector 5",
+  "total": 176.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Onion Uttapam",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo034",
+  "date": "2025-12-19",
+  "restaurant": "Roll Republic",
+  "area": "Hill View",
+  "total": 113.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Peri Peri Fries",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo033",
+  "date": "2025-12-08",
+  "restaurant": "Bun Stop",
+  "area": "Lake Road",
+  "total": 116.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Chocolate Shake",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo032",
+  "date": "2025-12-02",
+  "restaurant": "Tiffin Theory",
+  "area": "Station Road",
+  "total": 94.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Filter Coffee",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo031",
+  "date": "2025-11-22",
+  "restaurant": "Crust & Co",
+  "area": "Sector 5",
+  "total": 230.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Garlic Bread",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo030",
+  "date": "2025-11-09",
+  "restaurant": "Sweet Tooth",
+  "area": "Market Yard",
+  "total": 347.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Gulab Jamun",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Chocolate Cake Slice",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo029",
+  "date": "2025-10-28",
+  "restaurant": "Roll Republic",
+  "area": "Station Road",
+  "total": 259.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Aloo Tikki Wrap",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Peri Peri Fries",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo028",
+  "date": "2025-10-20",
+  "restaurant": "Wok This Way",
+  "area": "Old Town",
+  "total": 255.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Veg Fried Rice",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Chilli Paneer Bowl",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo027",
+  "date": "2025-10-08",
+  "restaurant": "Roll Republic",
+  "area": "Hill View",
+  "total": 164.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Paneer Kathi Roll",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo026",
+  "date": "2025-09-28",
+  "restaurant": "Roll Republic",
+  "area": "Old Town",
+  "total": 262.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Peri Peri Fries",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo025",
+  "date": "2025-09-17",
+  "restaurant": "Ghar Ka Khana",
+  "area": "Hill View",
+  "total": 147.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Rajma Rice Bowl",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo024",
+  "date": "2025-09-10",
+  "restaurant": "Sweet Tooth",
+  "area": "Lake Road",
+  "total": 79.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Gulab Jamun",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo023",
+  "date": "2025-08-29",
+  "restaurant": "Roll Republic",
+  "area": "Lake Road",
+  "total": 70.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Paneer Kathi Roll",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo022",
+  "date": "2025-08-17",
+  "restaurant": "Ghar Ka Khana",
+  "area": "Lake Road",
+  "total": 96.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Veg Thali",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo021",
+  "date": "2025-08-04",
+  "restaurant": "Sweet Tooth",
+  "area": "Hill View",
+  "total": 240.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Gulab Jamun",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo020",
+  "date": "2025-07-30",
+  "restaurant": "Bun Stop",
+  "area": "Market Yard",
+  "total": 286.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Chocolate Shake",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Crispy Chicken Burger",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo019",
+  "date": "2025-07-17",
+  "restaurant": "Wok This Way",
+  "area": "Station Road",
+  "total": 88.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Hakka Noodles",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo018",
+  "date": "2025-07-06",
+  "restaurant": "Wok This Way",
+  "area": "Station Road",
+  "total": 71.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Egg Fried Rice",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo017",
+  "date": "2025-06-24",
+  "restaurant": "Ghar Ka Khana",
+  "area": "Sector 5",
+  "total": 428.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Rajma Rice Bowl",
+    "qty": 2,
+    "addons": []
+   },
+   {
+    "name": "Chapati",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo016",
+  "date": "2025-06-14",
+  "restaurant": "Roll Republic",
+  "area": "Lake Road",
+  "total": 280.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Peri Peri Fries",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo015",
+  "date": "2025-06-08",
+  "restaurant": "Paratha Lane",
+  "area": "Hill View",
+  "total": 240.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Paneer Paratha",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo014",
+  "date": "2025-05-22",
+  "restaurant": "Midnight Momos",
+  "area": "Lake Road",
+  "total": 133.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Veg Steamed Momo",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo013",
+  "date": "2025-05-14",
+  "restaurant": "Tiffin Theory",
+  "area": "Sector 5",
+  "total": 522.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Onion Uttapam",
+    "qty": 2,
+    "addons": []
+   },
+   {
+    "name": "Filter Coffee",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo012",
+  "date": "2025-05-06",
+  "restaurant": "Roll Republic",
+  "area": "Sector 5",
+  "total": 318.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Aloo Tikki Wrap",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo011",
+  "date": "2025-04-27",
+  "restaurant": "Roll Republic",
+  "area": "Hill View",
+  "total": 434.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Aloo Tikki Wrap",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Egg Roll",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo010",
+  "date": "2025-04-10",
+  "restaurant": "Roll Republic",
+  "area": "Market Yard",
+  "total": 335.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Peri Peri Fries",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Paneer Kathi Roll",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo009",
+  "date": "2025-04-04",
+  "restaurant": "Roll Republic",
+  "area": "Sector 5",
+  "total": 438.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Aloo Tikki Wrap",
+    "qty": 2,
+    "addons": []
+   },
+   {
+    "name": "Peri Peri Fries",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo008",
+  "date": "2025-03-26",
+  "restaurant": "Bun Stop",
+  "area": "Lake Road",
+  "total": 159.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Classic Veg Burger",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo007",
+  "date": "2025-03-14",
+  "restaurant": "Tiffin Theory",
+  "area": "Hill View",
+  "total": 467.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Idli Sambar",
+    "qty": 2,
+    "addons": []
+   },
+   {
+    "name": "Filter Coffee",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo006",
+  "date": "2025-03-04",
+  "restaurant": "Paratha Lane",
+  "area": "Sector 5",
+  "total": 257.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Paneer Paratha",
+    "qty": 1,
+    "addons": []
+   },
+   {
+    "name": "Aloo Paratha",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo005",
+  "date": "2025-02-21",
+  "restaurant": "Sweet Tooth",
+  "area": "Sector 5",
+  "total": 176.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Gulab Jamun",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo004",
+  "date": "2025-02-07",
+  "restaurant": "Roll Republic",
+  "area": "Sector 5",
+  "total": 152.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Paneer Kathi Roll",
+    "qty": 2,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo003",
+  "date": "2025-01-30",
+  "restaurant": "Ghar Ka Khana",
+  "area": "Sector 5",
+  "total": 140.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Veg Thali",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo002",
+  "date": "2025-01-16",
+  "restaurant": "Roll Republic",
+  "area": "Hill View",
+  "total": 74.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Paneer Kathi Roll",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ },
+ {
+  "id": "demo001",
+  "date": "2025-01-12",
+  "restaurant": "Bun Stop",
+  "area": "Station Road",
+  "total": 79.0,
+  "status": "Delivered",
+  "items": [
+   {
+    "name": "Crispy Chicken Burger",
+    "qty": 1,
+    "addons": []
+   }
+  ]
+ }
+]

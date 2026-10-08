@@ -1,0 +1,9 @@
+# Personal order history and anything built from it
+data/
+zomato-pile.html
+
+# Videos (too large / not ours)
+*.mov
+*.mp4
+
+.DS_Store
